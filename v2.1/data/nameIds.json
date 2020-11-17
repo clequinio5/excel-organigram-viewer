@@ -1,0 +1,56 @@
+{
+    "Organisation Unit 1": [
+        "1980:MCN/OU1",
+        "2003:MCN/OU1",
+        "2012:MCN/OU1"
+    ],
+    "Sub OU 1": [
+        "1980:MCN/OU1/SOU1"
+    ],
+    "Sub OU 2": [
+        "1980:MCN/OU1/SOU2",
+        "2003:MCN/OU1/SOU2",
+        "2012:MCN/OU2/SOU2"
+    ],
+    "Organisation Unit 2": [
+        "1980:MCN/OU2",
+        "2003:MCN/OU2",
+        "2012:MCN/OU2"
+    ],
+    "Sub OU 3": [
+        "1980:MCN/OU2/SOU3",
+        "2003:MCN/OU2/SOU3",
+        "2012:MCN/OU1/SOU3"
+    ],
+    "Sub SOU 1": [
+        "1980:MCN/OU2/SOU3/SSOU1",
+        "2003:MCN/OU2/SOU3/SSOU1"
+    ],
+    "Sub SOU 2": [
+        "1980:MCN/OU2/SOU3/SSOU2",
+        "2003:MCN/OU2/SOU3/SSOU2",
+        "2012:MCN/OU2/SOU4/SSOU2"
+    ],
+    "Sub OU 5": [
+        "2003:MCN/OU1/SOU5",
+        "2012:MCN/OU1/SOU5"
+    ],
+    "Sub SOU 3": [
+        "2003:MCN/OU2/SOU3/SSOU3",
+        "2012:MCN/OU2/SOU2/SSOU3"
+    ],
+    "Sub OU 4": [
+        "2003:MCN/OU2/SOU4",
+        "2012:MCN/OU2/SOU4"
+    ],
+    "Sub SOU 5": [
+        "2003:MCN/OU2/SOU4/SSOU5"
+    ],
+    "Sub SOU 6": [
+        "2003:MCN/OU2/SOU4/SSOU6",
+        "2012:MCN/OU2/SOU2/SSOU6"
+    ],
+    "Sub SOU 7": [
+        "2012:MCN/OU2/SOU2/SSOU7"
+    ]
+}

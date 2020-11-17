@@ -1,0 +1,269 @@
+{
+    "1980": {
+        "name": "My Company Name",
+        "shortName": "MCN",
+        "path": "MCN",
+        "children": [
+            {
+                "orgKey": "1980",
+                "name": "Organisation Unit 1",
+                "shortName": "OU1",
+                "comment": "Comment on unit OU1",
+                "path": "MCN/OU1",
+                "id": "1980:MCN/OU1",
+                "children": [
+                    {
+                        "orgKey": "1980",
+                        "name": "Sub OU 1",
+                        "shortName": "SOU1",
+                        "comment": "Comment on unit SOU1",
+                        "path": "MCN/OU1/SOU1",
+                        "id": "1980:MCN/OU1/SOU1"
+                    },
+                    {
+                        "orgKey": "1980",
+                        "name": "Sub OU 2",
+                        "shortName": "SOU2",
+                        "comment": "Comment on unit SOU2",
+                        "path": "MCN/OU1/SOU2",
+                        "id": "1980:MCN/OU1/SOU2"
+                    }
+                ]
+            },
+            {
+                "orgKey": "1980",
+                "name": "Organisation Unit 2",
+                "shortName": "OU2",
+                "comment": "Comment on unit OU2",
+                "path": "MCN/OU2",
+                "id": "1980:MCN/OU2",
+                "children": [
+                    {
+                        "orgKey": "1980",
+                        "name": "Sub OU 3",
+                        "shortName": "SOU3",
+                        "comment": "Comment on unit SOU3",
+                        "path": "MCN/OU2/SOU3",
+                        "id": "1980:MCN/OU2/SOU3",
+                        "children": [
+                            {
+                                "orgKey": "1980",
+                                "name": "Sub SOU 1",
+                                "shortName": "SSOU1",
+                                "comment": "Comment on unit SSOU1",
+                                "path": "MCN/OU2/SOU3/SSOU1",
+                                "id": "1980:MCN/OU2/SOU3/SSOU1"
+                            },
+                            {
+                                "orgKey": "1980",
+                                "name": "Sub SOU 2",
+                                "shortName": "SSOU2",
+                                "comment": "Comment on unit SSOU2",
+                                "path": "MCN/OU2/SOU3/SSOU2",
+                                "id": "1980:MCN/OU2/SOU3/SSOU2"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "2003": {
+        "name": "My Company Name",
+        "shortName": "MCN",
+        "path": "MCN",
+        "children": [
+            {
+                "orgKey": "2003",
+                "name": "Organisation Unit 1",
+                "shortName": "OU1",
+                "comment": "Comment on unit OU1",
+                "path": "MCN/OU1",
+                "id": "2003:MCN/OU1",
+                "children": [
+                    {
+                        "orgKey": "2003",
+                        "name": "Sub OU 5",
+                        "shortName": "SOU5",
+                        "comment": "Comment on unit SOU5",
+                        "path": "MCN/OU1/SOU5",
+                        "id": "2003:MCN/OU1/SOU5"
+                    },
+                    {
+                        "orgKey": "2003",
+                        "name": "Sub OU 2",
+                        "shortName": "SOU2",
+                        "comment": "Comment on unit SOU2",
+                        "path": "MCN/OU1/SOU2",
+                        "id": "2003:MCN/OU1/SOU2"
+                    }
+                ]
+            },
+            {
+                "orgKey": "2003",
+                "name": "Organisation Unit 2",
+                "shortName": "OU2",
+                "comment": "Comment on unit OU2",
+                "path": "MCN/OU2",
+                "id": "2003:MCN/OU2",
+                "children": [
+                    {
+                        "orgKey": "2003",
+                        "name": "Sub OU 3",
+                        "shortName": "SOU3",
+                        "comment": "Comment on unit SOU3",
+                        "path": "MCN/OU2/SOU3",
+                        "id": "2003:MCN/OU2/SOU3",
+                        "children": [
+                            {
+                                "orgKey": "2003",
+                                "name": "Sub SOU 1",
+                                "shortName": "SSOU1",
+                                "comment": "Comment on unit SSOU1",
+                                "path": "MCN/OU2/SOU3/SSOU1",
+                                "id": "2003:MCN/OU2/SOU3/SSOU1"
+                            },
+                            {
+                                "orgKey": "2003",
+                                "name": "Sub SOU 2",
+                                "shortName": "SSOU2",
+                                "comment": "Comment on unit SSOU2",
+                                "path": "MCN/OU2/SOU3/SSOU2",
+                                "id": "2003:MCN/OU2/SOU3/SSOU2"
+                            },
+                            {
+                                "orgKey": "2003",
+                                "name": "Sub SOU 3",
+                                "shortName": "SSOU3",
+                                "comment": "Comment on unit SSOU3",
+                                "path": "MCN/OU2/SOU3/SSOU3",
+                                "id": "2003:MCN/OU2/SOU3/SSOU3"
+                            }
+                        ]
+                    },
+                    {
+                        "orgKey": "2003",
+                        "name": "Sub OU 4",
+                        "shortName": "SOU4",
+                        "comment": "Comment on unit SOU4",
+                        "path": "MCN/OU2/SOU4",
+                        "id": "2003:MCN/OU2/SOU4",
+                        "children": [
+                            {
+                                "orgKey": "2003",
+                                "name": "Sub SOU 5",
+                                "shortName": "SSOU5",
+                                "comment": "Comment on unit SSOU5",
+                                "path": "MCN/OU2/SOU4/SSOU5",
+                                "id": "2003:MCN/OU2/SOU4/SSOU5"
+                            },
+                            {
+                                "orgKey": "2003",
+                                "name": "Sub SOU 6",
+                                "shortName": "SSOU6",
+                                "comment": "Comment on unit SSOU6",
+                                "path": "MCN/OU2/SOU4/SSOU6",
+                                "id": "2003:MCN/OU2/SOU4/SSOU6"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "2012": {
+        "name": "My Company Name",
+        "shortName": "MCN",
+        "path": "MCN",
+        "children": [
+            {
+                "orgKey": "2012",
+                "name": "Organisation Unit 1",
+                "shortName": "OU1",
+                "comment": "Comment on unit OU1",
+                "path": "MCN/OU1",
+                "id": "2012:MCN/OU1",
+                "children": [
+                    {
+                        "orgKey": "2012",
+                        "name": "Sub OU 5",
+                        "shortName": "SOU5",
+                        "comment": "Comment on unit SOU5",
+                        "path": "MCN/OU1/SOU5",
+                        "id": "2012:MCN/OU1/SOU5"
+                    },
+                    {
+                        "orgKey": "2012",
+                        "name": "Sub OU 3",
+                        "shortName": "SOU3",
+                        "comment": "Comment on unit SOU3",
+                        "path": "MCN/OU1/SOU3",
+                        "id": "2012:MCN/OU1/SOU3"
+                    }
+                ]
+            },
+            {
+                "orgKey": "2012",
+                "name": "Organisation Unit 2",
+                "shortName": "OU2",
+                "comment": "Comment on unit OU2",
+                "path": "MCN/OU2",
+                "id": "2012:MCN/OU2",
+                "children": [
+                    {
+                        "orgKey": "2012",
+                        "name": "Sub OU 2",
+                        "shortName": "SOU2",
+                        "comment": "Comment on unit SOU2",
+                        "path": "MCN/OU2/SOU2",
+                        "id": "2012:MCN/OU2/SOU2",
+                        "children": [
+                            {
+                                "orgKey": "2012",
+                                "name": "Sub SOU 7",
+                                "shortName": "SSOU7",
+                                "comment": "Comment on unit SSOU7",
+                                "path": "MCN/OU2/SOU2/SSOU7",
+                                "id": "2012:MCN/OU2/SOU2/SSOU7"
+                            },
+                            {
+                                "orgKey": "2012",
+                                "name": "Sub SOU 6",
+                                "shortName": "SSOU6",
+                                "comment": "Comment on unit SSOU6",
+                                "path": "MCN/OU2/SOU2/SSOU6",
+                                "id": "2012:MCN/OU2/SOU2/SSOU6"
+                            },
+                            {
+                                "orgKey": "2012",
+                                "name": "Sub SOU 3",
+                                "shortName": "SSOU3",
+                                "comment": "Comment on unit SSOU3",
+                                "path": "MCN/OU2/SOU2/SSOU3",
+                                "id": "2012:MCN/OU2/SOU2/SSOU3"
+                            }
+                        ]
+                    },
+                    {
+                        "orgKey": "2012",
+                        "name": "Sub OU 4",
+                        "shortName": "SOU4",
+                        "comment": "Comment on unit SOU4",
+                        "path": "MCN/OU2/SOU4",
+                        "id": "2012:MCN/OU2/SOU4",
+                        "children": [
+                            {
+                                "orgKey": "2012",
+                                "name": "Sub SOU 2",
+                                "shortName": "SSOU2",
+                                "comment": "Comment on unit SSOU2",
+                                "path": "MCN/OU2/SOU4/SSOU2",
+                                "id": "2012:MCN/OU2/SOU4/SSOU2"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

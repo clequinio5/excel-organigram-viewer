@@ -1,0 +1,520 @@
+<!doctype html>
+
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Historga</title>
+
+  <style>
+    input {
+      width: calc(100vw - 40px);
+      background-color: #3b8edf;
+      position: absolute;
+      padding: 10px;
+      border: none;
+      font-size: 14px;
+    }
+
+    .separator {
+      background-color: grey;
+      height: 3px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    #results {
+      margin-top: 50px;
+    }
+
+    .result-title {
+      color: #3b8edf;
+      font-weight: bold;
+    }
+
+    #autocomplete {
+      color: #999;
+      background-color: #f5f5f5;
+    }
+
+    .highlight {
+      background-color: yellow;
+    }
+
+    #year-select {
+      margin-bottom: 10px;
+    }
+
+    #suggestions {
+      position: relative;
+      top: 50px;
+    }
+
+    .title {
+      font-size: 16px;
+    }
+
+    .subtitle {
+      font-size: 10px;
+    }
+
+    #suggestions>div {
+      padding: 10px 0;
+      margin: 0 8px;
+      border-bottom: 1px solid #ddd;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .node circle {
+      fill: #fff;
+      stroke: #3b8edf;
+      stroke-width: 3px;
+    }
+
+    .node circle.highlighted {
+      stroke: red;
+    }
+
+    .node text {
+      font: 12px sans-serif;
+    }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 2px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <script type="text/javascript" src="./lib/d3.v5.min.js"></script>
+  <script type="text/javascript" src="./lib/flexsearch.min.js"></script>
+
+  <div>
+    <select name="years" id="year-select" onchange='onSelectChange(this)'>
+      <option value="">--Organigramme par année--</option>
+    </select>
+  </div>
+  <div>
+    <input type="text" id="autocomplete">
+    <input type="text" id="userinput" placeholder="Rechercher une unité dans tous les organigrammes...">
+    <div id="suggestions"></div>
+  </div>
+  <div>
+    <div id="results"></div>
+  </div>
+
+  <script>
+
+    var data = []
+    var name_ids = {}
+    var index = new FlexSearch({
+      doc: {
+        id: "id",
+        field: [
+          "name",
+          "shortName"
+        ]
+      },
+      encode: "advanced",
+      suggest: true,
+      cache: true,
+      tokenize: "full",
+      filter: ['-', 'd', 'l', 'de', 'à', 'a', ';', '+', 'et', 'du', 'en', 'la', 'le', 'les', 'au', 'dans', 'des', ':', '?', 'pour', 'sur', '']
+    });
+
+    const init = async () => {
+      data = (await (await fetch("./data/charts.json")).json());
+      document.getElementById("year-select").innerHTML = ' <option value="">--Organigramme par année--</option>' + Object.keys(data).map(year => '<option value="' + year + '">' + year + '</option>')
+
+      const autocompletev = (await (await fetch("./data/autocompletev.json")).json())
+      autocomplete(autocompletev);
+
+      name_ids = (await (await fetch("./data/nameIds.json")).json());
+    }
+
+    init()
+
+    const autocomplete = (data) => {
+
+      for (var i = 0; i < data.length; i++) {
+        var { name, shortName } = data[i]
+        index.add({ id: i, name: name, shortName: shortName });
+      }
+
+      var suggestions = document.getElementById("suggestions");
+      var autocomplete = document.getElementById("autocomplete");
+      var userinput = document.getElementById("userinput");
+
+      userinput.addEventListener("input", show_results, true);
+      userinput.addEventListener("keyup", accept_autocomplete, true);
+      suggestions.addEventListener("click", accept_suggestion, true);
+
+      function show_results() {
+
+        var value = this.value;
+        var results = index.search({
+          query: value,
+          field: ["name", "shortName"],
+          boost: [1, 2],
+          bool: "or",
+          limit: 25,
+          sort: "score",
+          depth: 2,
+          highlights: {
+            fragmentsToReturn: 1,
+            highlightedFields: ['name'],
+            preTag: "<span class='highlight'>",
+            postTag: "</span>"
+          }
+        });
+        var entry, childs = suggestions.childNodes;
+        for (var i = 0; i < results.length; i++) {
+          entry = childs[i]
+
+          if (!entry) {
+            entry = document.createElement("div");
+            suggestions.appendChild(entry);
+          }
+		  
+		  const reg = new RegExp(value.split(' ').filter(el => el != "").join("|"), 'i')
+		  
+          const d = data[results[i].id]
+          const sh = d.shortName ? " (" + d.shortName.replace(reg, "<span class='highlight'>$&</span>") + ")" : "";
+          const name = d.name.replace(reg, "<span class='highlight'>$&</span>")
+          let htmlChanges = ""
+          const { changes } = d
+          if (changes && changes.length > 0) {
+            for (const change of changes) {
+              for (const o of change.old) {
+                htmlChanges += "<div class='subtitle'>" + change.date + " : " + o.path + " &rarr; " + change.new.path + "</div>"
+              }
+            }
+          }
+          let html = "<div class='title'>" + name + sh + "</div>"
+          html += "<div class='subtitle'>" + d.orgKey + "</div>"
+          html += htmlChanges
+          entry.innerHTML = html;
+        }
+        while (childs.length > results.length) {
+          suggestions.removeChild(childs[i])
+        }
+        var first_result = data[results[0]];
+        var match = first_result && first_result.toLowerCase().indexOf(value.toLowerCase());
+        if (first_result && (match !== -1)) {
+          autocomplete.value = value + first_result.substring(match + value.length);
+          autocomplete.current = first_result;
+        } else {
+          autocomplete.value = autocomplete.current = value;
+        }
+      }
+
+      function accept_autocomplete(event) {
+        if ((event || window.event).keyCode === 13) {
+          this.value = autocomplete.value = autocomplete.current;
+          onSearchChange(this.value)
+        }
+      }
+
+      function accept_suggestion(event) {
+        document.getElementById("year-select").options.selectedIndex = 0
+        var target = (event || window.event).target;
+        userinput.value = autocomplete.value = target.parentNode.firstChild.textContent;
+        while (suggestions.lastChild) {
+          suggestions.removeChild(suggestions.lastChild);
+        }
+        onSearchChange(userinput.value)
+        return false;
+      }
+    }
+
+    const onSearchChange = (nodeValue) => {
+      const name = nodeValue.split('(')[0].trim()
+      const results = name_ids[name]
+      const trees = results.map((el, i) => {
+        const [orgKey, path] = el.split(':')
+        return { id: el, orgKey: orgKey, path: path, treeData: data[orgKey], selector: "#graph_" + i, link: "<div class='result-title'>" + el + "</div>", html: "<div class='separator'></div><div id='result_" + i + "'><div id='id_" + i + "' class='result-title'>" + el + "</div><div id='graph_" + i + "'></div></div>" }
+      })
+      document.getElementById("results").innerHTML = trees.map(el => el.link).join('') + trees.map(el => el.html).join('')
+      for (const tree of trees) {
+        const { treeData, selector, path } = tree
+        if (treeData) {
+          drawTree(treeData, selector, path, 400)
+        }
+      }
+    }
+
+    const onSelectChange = function (e) {
+      document.getElementById("userinput").value = ""
+      const selectedYear = e.value;
+      const selectedTree = data[selectedYear]
+      document.getElementById('results').innerHTML = '';
+      if (selectedTree) {
+        drawTree(selectedTree, "#results")
+      }
+    }
+
+    const drawTree = (treeData, target, path = undefined, wHeight = 1000) => {
+      const margin = { top: 20, right: 90, bottom: 30, left: 90 }
+      const width = screen.width - margin.left - margin.right - 60
+      const height = wHeight - margin.top - margin.bottom
+
+      const svg = d3.select(target)
+        .append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .call(d3.zoom().on("zoom", function () {
+          svg.attr("transform", d3.event.transform)
+        }))
+        .append("g")
+        .attr("transform", "translate("
+          + margin.left + "," + margin.top + ")");
+
+      var i = 0,
+        duration = 750,
+        root;
+
+      const treemap = d3.tree().size([height, width]);
+
+      root = d3.hierarchy(treeData, function (d) { return d.children; });
+      root.x0 = height / 2;
+      root.y0 = 0;
+
+      function collapse(d) {
+        if (d.children) {
+          d._children = d.children
+          d._children.forEach(collapse)
+          d.children = null
+        }
+      }
+
+      let highlightedNodesPath = []
+      if (path) {
+        const nodes = root.descendants()
+        const links = root.descendants().slice[0]
+        const targetNode = nodes.find(d => d.data.path == path)
+        highlightedNodesPath = targetNode.path(root).map(el => el.data.path)
+
+        console.log(highlightedNodesPath)
+        for (const n of nodes) {
+          const nodePath = n.data.path
+          if (!highlightedNodesPath.slice(1).includes(nodePath)) {
+            collapse(n)
+          }
+        }
+      }
+
+      update(root);
+
+      function update(source) {
+
+        var treeData = treemap(root)
+
+        var nodes = treeData.descendants()
+        var links = treeData.descendants().slice(1)
+
+        nodes.forEach(function (d) { d.y = d.depth * 300 })
+
+        //Nodes
+        var node = svg.selectAll('g.node')
+          .data(nodes, function (d) { return d.id || (d.id = ++i); })
+
+        var nodeEnter = node.enter().append('g')
+          .classed('node', true)
+          .attr("transform", function (d) {
+            return "translate(" + source.y0 + "," + source.x0 + ")";
+          })
+
+        nodeEnter.append('circle')
+          .classed('node', true)
+          .classed('highlighted', (d) => highlightedNodesPath.includes(d.data.path))
+          .attr('r', 1e-6)
+          .style("fill", (d) => {
+            if (d._children) {
+              if (highlightedNodesPath.includes(d.data.path)) {
+                return "#ffcccb"
+              } else {
+                return "lightsteelblue"
+              }
+            } else {
+              return "#fff"
+            }
+          })
+          .on('click', click);
+
+
+        nodeEnter.append('text')
+          .attr("dy", ".35em")
+          .attr("x", function (d) {
+            return d.children || d._children ? -13 : 13;
+          })
+          .attr("text-anchor", function (d) {
+            return d.children || d._children ? "end" : "start";
+          })
+          .text(function (d) {
+            const sh = d.data.shortName ? " (" + d.data.shortName + ")" : ""
+            return d.data.name + sh;
+          })
+          .on('click', (d) => {
+		  
+			d.data.comment ? alert(d.data.comment) : null;
+          })
+
+        var nodeUpdate = nodeEnter.merge(node);
+
+        nodeUpdate.transition()
+          .duration(duration)
+          .attr("transform", function (d) {
+            return "translate(" + d.y + "," + d.x + ")";
+          });
+
+        nodeUpdate.select('circle.node')
+          .attr('r', 10)
+          .style("fill", (d) => {
+            if (d._children) {
+              if (highlightedNodesPath.includes(d.data.path)) {
+                return "#ffcccb"
+              } else {
+                return "lightsteelblue"
+              }
+            } else {
+              return "#fff"
+            }
+          })
+          .attr('cursor', 'pointer');
+
+        var nodeExit = node.exit().transition()
+          .duration(duration)
+          .attr("transform", function (d) {
+            return "translate(" + source.y + "," + source.x + ")";
+          })
+          .remove();
+
+        nodeExit.select('circle')
+          .attr('r', 1e-6);
+
+        nodeExit.select('text')
+          .style('fill-opacity', 1e-6);
+
+        //Links
+        var link = svg.selectAll('path.link')
+          .data(links, function (d) { return d.id; });
+
+        var linkEnter = link.enter().insert('path', "g")
+          .attr("class", "link")
+          .attr('d', function (d) {
+            var o = { x: source.x0, y: source.y0 }
+            return diagonal(o, o)
+          });
+
+        var linkUpdate = linkEnter.merge(link);
+
+        linkUpdate.transition()
+          .duration(duration)
+          .attr('d', function (d) { return diagonal(d, d.parent) });
+
+        var linkExit = link.exit().transition()
+          .duration(duration)
+          .attr('d', function (d) {
+            var o = { x: source.x, y: source.y }
+            return diagonal(o, o)
+          })
+          .remove();
+
+        nodes.forEach(function (d) {
+          d.x0 = d.x;
+          d.y0 = d.y;
+        });
+
+        function diagonal(s, d) {
+
+          path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+          return path
+        }
+
+        function click(d) {
+          if (d.children) {
+            d._children = d.children;
+            d.children = null;
+          } else {
+            d.children = d._children;
+            d._children = null;
+          }
+          update(d);
+        }
+      }
+    }
+
+
+    // const drawTree = (treeData) => {
+    //   // document.getElementById('results').innerHTML = '';
+
+    //   // const margin = {
+    //   //   top: 0,
+    //   //   right: 0,
+    //   //   bottom: 0,
+    //   //   left: 0
+    //   // }
+    //   // const width = 800 - margin.right - margin.left
+    //   // const height = 400 - margin.top - margin.bottom
+    //   // const rectNode = { width: 120, height: 45, textMargin: 5 }
+    //   // const tooltip = { width: 150, height: 40, textMargin: 5 }
+
+    //   // var svg = d3.select("#results")
+    //   //   .append("svg")
+    //   //   .attr("width", "100%")
+    //   //   .attr("height", "100%")
+    //   //   .call(d3.zoom().on("zoom", function () {
+    //   //     svg.attr("transform", d3.event.transform)
+    //   //   }))
+    //   //   .append("g")
+
+    //   // var root = d3.hierarchy(selectedTree)
+    //   // console.log(height)
+    //   // console.log(width)
+    //   // var treeLayout = d3.tree().size([height, width])
+    //   // treeLayout(root)
+
+    //   // console.log(root.descendants())
+    //   // console.log(root.links())
+
+    //   // // Nodes
+    //   // d3.select('svg g.nodes')
+    //   //   .selectAll('circle.node')
+    //   //   .data(root.descendants())
+    //   //   .enter()
+    //   //   .append('circle')
+    //   //   .classed('node', true)
+    //   //   .attr("class", "node")
+    //   //   .attr('cx', function (d) { return d.x; })
+    //   //   .attr('cy', function (d) { return d.y; })
+    //   //   .attr('r', 4);
+
+    //   // // Links
+    //   // d3.select('svg g.links')
+    //   //   .selectAll('line.link')
+    //   //   .data(root.links())
+    //   //   .enter()
+    //   //   .append('line')
+    //   //   .classed('link', true)
+    //   //   .attr("class", "link")
+    //   //   .attr('x1', function (d) { return d.source.x; })
+    //   //   .attr('y1', function (d) { return d.source.y; })
+    //   //   .attr('x2', function (d) { return d.target.x; })
+    //   //   .attr('y2', function (d) { return d.target.y; });
+    // }
+  </script>
+</body>
+
+</html>

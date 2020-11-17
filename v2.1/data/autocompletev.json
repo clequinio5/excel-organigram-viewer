@@ -1,0 +1,160 @@
+[
+    {
+        "name": "Organisation Unit 1",
+        "shortName": "OU1",
+        "orgKey": [
+            "1980",
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Organisation Unit 2",
+        "shortName": "OU2",
+        "orgKey": [
+            "1980",
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub OU 1",
+        "shortName": "SOU1",
+        "orgKey": [
+            "1980"
+        ]
+    },
+    {
+        "name": "Sub OU 2",
+        "shortName": "SOU2",
+        "orgKey": [
+            "1980",
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub OU 3",
+        "shortName": "SOU3",
+        "orgKey": [
+            "1980",
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub OU 4",
+        "shortName": "SOU4",
+        "orgKey": [
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub OU 5",
+        "shortName": "SOU5",
+        "orgKey": [
+            "2003",
+            "2012"
+        ],
+        "changes": [
+            {
+                "date": "2003",
+                "type": "rename",
+                "old": [
+                    {
+                        "path": "MCN/OU1/SOU1",
+                        "shortName": "SOU1",
+                        "orgKey": "1980",
+                        "id": "1980:MCN/OU1/SOU1",
+                        "name": "Sub OU 1"
+                    }
+                ],
+                "new": {
+                    "orgKey": "2003",
+                    "name": "Sub OU 5",
+                    "shortName": "SOU5",
+                    "comment": "Comment on unit SOU5",
+                    "path": "MCN/OU1/SOU5",
+                    "id": "2003:MCN/OU1/SOU5"
+                }
+            }
+        ]
+    },
+    {
+        "name": "Sub SOU 1",
+        "shortName": "SSOU1",
+        "orgKey": [
+            "1980",
+            "2003"
+        ]
+    },
+    {
+        "name": "Sub SOU 2",
+        "shortName": "SSOU2",
+        "orgKey": [
+            "1980",
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub SOU 3",
+        "shortName": "SSOU3",
+        "orgKey": [
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub SOU 5",
+        "shortName": "SSOU5",
+        "orgKey": [
+            "2003"
+        ]
+    },
+    {
+        "name": "Sub SOU 6",
+        "shortName": "SSOU6",
+        "orgKey": [
+            "2003",
+            "2012"
+        ]
+    },
+    {
+        "name": "Sub SOU 7",
+        "shortName": "SSOU7",
+        "orgKey": [
+            "2012"
+        ],
+        "changes": [
+            {
+                "date": "2012",
+                "type": "fusion",
+                "old": [
+                    {
+                        "path": "MCN/OU2/SOU2/SSOU1",
+                        "shortName": "SSOU1",
+                        "orgKey": "2003",
+                        "id": "2003:MCN/OU2/SOU2/SSOU1"
+                    },
+                    {
+                        "path": "MCN/OU2/SOU4/SSOU5",
+                        "shortName": "SSOU5",
+                        "orgKey": "2003",
+                        "id": "2003:MCN/OU2/SOU4/SSOU5",
+                        "name": "Sub SOU 5"
+                    }
+                ],
+                "new": {
+                    "orgKey": "2012",
+                    "name": "Sub SOU 7",
+                    "shortName": "SSOU7",
+                    "comment": "Comment on unit SSOU7",
+                    "path": "MCN/OU2/SOU2/SSOU7",
+                    "id": "2012:MCN/OU2/SOU2/SSOU7"
+                }
+            }
+        ]
+    }
+]
