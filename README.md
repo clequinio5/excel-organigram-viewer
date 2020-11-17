@@ -25,8 +25,14 @@ Excel datasheet with multi tabs like the example in the project:
 ## Output
 
 <table>
+<tr>
+<td> <img src="./screenshots/organigram_by_year.png" alt="Drawing" style="width: 250px;"/> </td> 
+</tr>
+</table>
+
+
+<table>
 <tr> 
-    <td> <img src="./screenshots/organigram_by_year.png" alt="Drawing" style="width: 250px;"/> </td> 
     <td> <img src="./screenshots/search.png" alt="Drawing" style="width: 250px;"/> </td>
 	<td> <img src="./screenshots/search_results.png" alt="Drawing" style="width: 250px;"/> </td> 
 </tr> 
