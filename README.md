@@ -49,7 +49,7 @@ Server and dependencies are already in the repo so all you have to do is:
 
 ## Changelog Synthax
 
-rename: Sub OU 5 (ex OU1/SOU1)
-fusion: Sub SOU 7 (ex OU2/SOU2/SSOU1 + OU2/SOU4/SSOU5)
+- rename: Sub OU 5 (ex OU1/SOU1)
+- fusion: Sub SOU 7 (ex OU2/SOU2/SSOU1 + OU2/SOU4/SSOU5)
 
 
