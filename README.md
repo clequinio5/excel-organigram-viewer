@@ -49,7 +49,7 @@ Server and dependencies are already in the repo so all you have to do is:
 
 ## Update excel database and reindex tree field
 
-- Update historga/v{version}/data/Organigrammes IRSN.xlsx
+- Update historga/v{version}/data/Organigrammes MCN.xlsx
 - Execute historga/v{version}/data/xlsx_to_json.bat
 - Launch tool executing historga/v{version}/server.bat
 
