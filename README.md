@@ -8,18 +8,20 @@ This data-viz tool enables you to visualize under a dynamic tree diagram shape a
 
 Excel datasheet with multi tabs like the example in the project:
 
-| OU1: Organisation Unit 1 |                |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit OU1   |
-|--------------------------|----------------|-------------------------------------------------------|--|--|--|--|--|--|--|--|--|--|-----------------------|
-|                          | SOU5: Sub OU 5 |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit SOU5  |
-|                          | SOU3: Sub OU 3 |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit SOU3  |
-|                          |                |                                                       |  |  |  |  |  |  |  |  |  |  |                       |
-| OU2: Organisation Unit 2 |                |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit OU2   |
-|                          | SOU2: Sub OU 2 |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit SOU2  |
-|                          |                | SSOU7: Sub SOU 7 (ex OU2/SOU2/SSOU1 + OU2/SOU4/SSOU5) |  |  |  |  |  |  |  |  |  |  | Comment on unit SSOU7 |
-|                          |                | SSOU6: Sub SOU 6                                      |  |  |  |  |  |  |  |  |  |  | Comment on unit SSOU6 |
-|                          |                | SSOU3: Sub SOU 3                                      |  |  |  |  |  |  |  |  |  |  | Comment on unit SSOU3 |
-|                          | SOU4: Sub OU 4 |                                                       |  |  |  |  |  |  |  |  |  |  | Comment on unit SOU4  |
-|                          |                | SSOU2: Sub SOU 2                                      |  |  |  |  |  |  |  |  |  |  | Comment on unit SSOU2 |
+| OU1: Organisation Unit 1 |                |                                                       |
+|--------------------------|----------------|-------------------------------------------------------|
+|                          | SOU5: Sub OU 5 |                                                       |
+|                          | SOU3: Sub OU 3 |                                                       |
+|                          |                |                                                       |
+| OU2: Organisation Unit 2 |                |                                                       |
+|                          | SOU2: Sub OU 2 |                                                       |
+|                          |                | SSOU7: Sub SOU 7 (ex OU2/SOU2/SSOU1 + OU2/SOU4/SSOU5) |
+|                          |                | SSOU6: Sub SOU 6                                      |
+|                          |                | SSOU3: Sub SOU 3                                      |
+|                          | SOU4: Sub OU 4 |                                                       |
+|                          |                | SSOU2: Sub SOU 2                                      |
+
+Comments displayed as tooltip can be added colon 14
 
 
 ## Output
