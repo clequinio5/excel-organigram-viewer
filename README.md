@@ -21,7 +21,7 @@ Excel datasheet with multi tabs like the example in the project:
 |                          | SOU4: Sub OU 4 |                                                       |
 |                          |                | SSOU2: Sub SOU 2                                      |
 
-Comments displayed as tooltip can be added colon 14
+Comments displayed as tooltip can be added column 14
 
 
 ## Output
